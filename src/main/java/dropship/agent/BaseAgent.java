@@ -46,10 +46,10 @@ public abstract class BaseAgent {
   }
 
   protected abstract void onStart(Properties properties,
-                               String groupArtifactString,
-                               Class<?> mainClass,
-                               Method mainMethod,
-                               Object[] arguments);
+                                  String groupArtifactString,
+                                  Class<?> mainClass,
+                                  Method mainMethod,
+                                  Object[] arguments);
 
   @SuppressWarnings("UnusedDeclaration")
   public static void error(Throwable t) {
