@@ -5,6 +5,9 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Properties;
 
+/**
+ * This class shows how a Dropship agent should be implemented. Note the {@code premain} method implementation.
+ */
 public final class TestAgent extends BaseAgent {
 
   public static void premain(final String agentArgument, final Instrumentation instrumentation) {
