@@ -19,9 +19,9 @@ To build a Dropship agent,
     * Implement `onStart(Properties, String, Class, Method, Object[])` - which will be invoked just before Dropship hands control over to the target
     * Implement `onError(Throwable)` - which will be invoked in the event of an exception from the target (or an unhandled exception in any threads).
     * Implement `onExit()`, which will be invoked as Dropship is shutting down
-1. Create a public static void premain(String agentArgument, Instrumentation instrumentation) method
+1. Create a `public static void premain(String agentArgument, Instrumentation instrumentation)` method
     * In it, instantiate your agent
     * Pass that instance to premain(String, Instrumentation, BaseAgent)
 1. Package your agent as a jar file. You will probably want to create a "shaded" jar
-1. Add a Premain-Class entry to the MANIFEST.MF in your jar file
-Use your agent from the command line: java -javaagent:youragent.jar -jar dropship.jar ...
+1. Add a `Premain-Class` entry to the `MANIFEST.MF` in your jar file
+1. Use your agent from the command line: `java -javaagent:youragent.jar -jar dropship.jar ...`
