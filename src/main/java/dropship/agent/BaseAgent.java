@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2014 zulily, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package dropship.agent;
 
 import javassist.ClassPool;
@@ -17,25 +32,25 @@ import java.util.concurrent.atomic.AtomicReference;
  * of subclasses of BaseAgent are wired in to the {@code preRun}, {@code onError} and {@code onExit}
  * methods of {@code Dropship}.
  * <p>
- *   To build a Dropship agent,
- *   <ol>
- *     <li>Extend {@link dropship.agent.BaseAgent}</li>
- *     <li>Implement {@link #onStart(java.util.Properties, String, Class, java.lang.reflect.Method, Object[])} -
- *     which will be invoked just before Dropship hands control over to the target</li>
- *     <li>Implement {@link #onError(Throwable)} - which will be invoked in the event of an exception from the
- *     target (or an unhandled exception in any threads).</li>
- *     <li>Implement {@link #onExit()} = which will be invoked as Dropship is shutting down</li>
- *     <li>Create a {@code public static void premain(}{@link java.lang.String}{@code agentArgument,}
- *     {@link java.lang.instrument.Instrumentation}{@code instrumentation)} method
-   *     <ul>
-   *       <li>In it, instantiate your agent</li>
-   *       <li>Pass that instance to {@link BaseAgent#premain(String, java.lang.instrument.Instrumentation, BaseAgent)}</li>
-   *     </ul>
- *     </li>
- *     <li>Package your agent as a jar file. You will probably want to create a "shaded" jar</li>
- *     <li>Add a {@code Premain-Class} entry to the MANIFEST.MF in your jar file</li>
- *     <li>Use your agent from the command line: {@code java -javaagent:youragent.jar -jar dropship.jar ...}</li>
- *   </ol>
+ * To build a Dropship agent,
+ * <ol>
+ * <li>Extend {@link dropship.agent.BaseAgent}</li>
+ * <li>Implement {@link #onStart(java.util.Properties, String, Class, java.lang.reflect.Method, Object[])} -
+ * which will be invoked just before Dropship hands control over to the target</li>
+ * <li>Implement {@link #onError(Throwable)} - which will be invoked in the event of an exception from the
+ * target (or an unhandled exception in any threads).</li>
+ * <li>Implement {@link #onExit()} = which will be invoked as Dropship is shutting down</li>
+ * <li>Create a {@code public static void premain(}{@link java.lang.String}{@code agentArgument,}
+ * {@link java.lang.instrument.Instrumentation}{@code instrumentation)} method
+ * <ul>
+ * <li>In it, instantiate your agent</li>
+ * <li>Pass that instance to {@link BaseAgent#premain(String, java.lang.instrument.Instrumentation, BaseAgent)}</li>
+ * </ul>
+ * </li>
+ * <li>Package your agent as a jar file. You will probably want to create a "shaded" jar</li>
+ * <li>Add a {@code Premain-Class} entry to the MANIFEST.MF in your jar file</li>
+ * <li>Use your agent from the command line: {@code java -javaagent:youragent.jar -jar dropship.jar ...}</li>
+ * </ol>
  * </p>
  */
 public abstract class BaseAgent {
@@ -45,16 +60,16 @@ public abstract class BaseAgent {
    * {@link dropship.agent.BaseAgent} to {@code Dropship} {@code preRun}, {@code onError} and
    * {@code onEnd} methods.
    * <p>
-   *   This method should be called from the {@code public static void premain} method of
-   *   a jar's Premain-Class as defined in its MANIFEST.MF.
+   * This method should be called from the {@code public static void premain} method of
+   * a jar's Premain-Class as defined in its MANIFEST.MF.
    * </p>
    * <p>
-   *   This method should only be invoked once.
+   * This method should only be invoked once.
    * </p>
    *
-   * @param agentArgument agent argument from {@code premain}, null is ok
+   * @param agentArgument   agent argument from {@code premain}, null is ok
    * @param instrumentation instrumentation object from {@code premain}, may not be null
-   * @param agent instance of agent implementation, may not be null
+   * @param agent           instance of agent implementation, may not be null
    */
   protected static void premain(final String agentArgument, final Instrumentation instrumentation, final BaseAgent agent) {
     if (instrumentation == null) {
