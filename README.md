@@ -6,7 +6,7 @@ Library for aiding in the development of "agents" or "plugins" for dropship.
 What For?
 ---------
 
-Implement a dropship agent if you wish to have code that runs before and after your target application. For example, you may wish to [https://github.com/zulily/dropship-statsd-agent](start up some threads that send JMX metrics to statsd).
+Implement a dropship agent if you wish to have code that runs before and after your target application. For example, you may wish to [start up some threads that send JMX metrics to statsd](https://github.com/zulily/dropship-statsd-agent).
 
 How?
 ----
