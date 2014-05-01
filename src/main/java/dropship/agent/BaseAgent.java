@@ -24,8 +24,8 @@ import java.lang.instrument.IllegalClassFormatException;
 import java.lang.instrument.Instrumentation;
 import java.lang.reflect.Method;
 import java.security.ProtectionDomain;
+import java.util.LinkedList;
 import java.util.Properties;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * BaseAgent provides methods to configure basic interaction with the Dropship lifecycle. Instances
@@ -78,23 +78,23 @@ public abstract class BaseAgent {
     if (agent == null) {
       throw new NullPointerException("agent");
     }
-    if (INSTANCE.get() != null) {
-      throw new IllegalStateException("agent is already set");
+    if (INSTANCES.isEmpty()) {
+      // when adding first agent, make sure to transform the dropship class to call in
+      instrumentation.addTransformer(new DropshipTransformer());
     }
-    if (!INSTANCE.compareAndSet(null, agent)) {
-      throw new RuntimeException("could not set agent");
-    }
-    instrumentation.addTransformer(new DropshipTransformer());
+
+    INSTANCES.add(agent);
   }
 
-  private static final AtomicReference<BaseAgent> INSTANCE = new AtomicReference<BaseAgent>();
+  private static final LinkedList<BaseAgent> INSTANCES = new LinkedList<BaseAgent>();
+
+  private static final BaseAgent INSTANCE = new ForwardingAgent(INSTANCES);
 
   private static BaseAgent get() {
-    BaseAgent instance = INSTANCE.get();
-    if (instance == null) {
+    if (INSTANCES.isEmpty()) {
       throw new IllegalStateException("Agent instance has not been set! Call BaseAgent.premain(String agentArg, Instrumentation inst, BaseAgent agent)");
     }
-    return instance;
+    return INSTANCE;
   }
 
   @SuppressWarnings("UnusedDeclaration")
