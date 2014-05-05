@@ -29,7 +29,7 @@
 
   <groupId>com.zulily.dropship</groupId>
   <artifactId>dropship-agent</artifactId>
-  <version>0.1</version>
+  <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>Dropship Agent Library</name>
   <description>Library to aid in the development of Dropship friendly agents</description>
@@ -44,7 +44,7 @@
     <url>http://github.com/zulily/dropship-agent</url>
     <connection>scm:git:git://github.com/zulily/dropship-agent.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/zulily/dropship-agent.git</developerConnection>
-    <tag>dropship-agent-0.1</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <issueManagement>
